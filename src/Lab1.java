@@ -1,7 +1,3 @@
-
-import java.util.HashMap;
-import java.util.Map;
-
 /**
  * Lab1 task 2
  * @author Kostya Nirchenko
@@ -24,8 +20,6 @@ public class Lab1 {
         
     public static void main(String[] args) {
         System.out.println("Площадь прямоугольника: " + calculateS(a, b) + "\n" 
-                + "Периметр прямоугольника: " + calculateP(a, b));
-        Map map = new HashMap<Integer, String>();
-        map.put(a, String.valueOf(b));
+                + "Периметр прямоугольника: " + calculateP(a, b));        
     }    
 }
