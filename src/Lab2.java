@@ -15,7 +15,6 @@ public class Lab2 {
     
     public static double setY(double x) {
         y = Math.sin(Math.log(Math.abs(x)) - 1);
-        y = Math.sin(Math.log(x) - 1);
         return y;
     }   
        
