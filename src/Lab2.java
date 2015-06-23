@@ -2,6 +2,12 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+/**
+ * Lab2 Task 2
+ * y = sin(ln(|x|) - 1)
+ * @author Kostya Nirchenko
+ */
+
 public class Lab2 {
     private static final BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
     private static double y;
@@ -15,6 +21,6 @@ public class Lab2 {
     public static void main(String[] args) throws IOException {
         System.out.print("Введите х ");
         x = Double.parseDouble(reader.readLine());        
-        System.out.printf("Результат расчета: %.2f", setY(x));
+        System.out.printf("Результат расчета: %.2f ", setY(x));
     }
 }
