@@ -38,9 +38,15 @@ public class Lab3 {
         }
         String[] forNums = sb.toString().split(" ");
         nums = new int[forNums.length];
-        for (int i = 0; i < forNums.length; i++) {
+        try {
+            for (int i = 0; i < forNums.length; i++) {
             nums[i] = Integer.parseInt(forNums[i]);
         }
+        } catch (NumberFormatException e) {
+            System.out.println("Ошибка чтения файла. Убедитесь что числа в нем целого типа!");
+            System.exit(-1);
+        }
+        
         sb = null;
         forNums = null;
         try {
