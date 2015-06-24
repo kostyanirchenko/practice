@@ -63,7 +63,7 @@ public class Lab3 {
      *
      * @return boolean
      */
-    public static boolean isSequenced() {
+    public static boolean isSequencedAscending() {
         readFile(fileName);
         boolean flag = false;
         for (int i = 0; i < nums.length - 1; i++) {
@@ -76,14 +76,28 @@ public class Lab3 {
         }
         return flag;
     }
+    
+    public static boolean isSequencedDescending() {
+        readFile(fileName);
+        boolean flag = false;
+        for (int i = 0; i < nums.length - 1; i++) {
+            if(nums[i + 1] < nums[i]) {
+                flag = true;
+            } else {
+                flag = false;
+                break;
+            }
+        }
+        return flag;
+    }
 
     public static void main(String[] args) {
-        if (!isSequenced()) {
-            for (int i = 0; i < nums.length; i++) {
-                System.out.print(nums[i] + " ");
-            }
-        } else {
+        if (isSequencedAscending() || isSequencedDescending()) {
             for (int i = nums.length / 2; i < nums.length; i++) {
+                System.out.print(nums[i] + " ");
+            }            
+        } else {
+            for (int i = 0; i < nums.length; i++) {
                 System.out.print(nums[i] + " ");
             }
         }
