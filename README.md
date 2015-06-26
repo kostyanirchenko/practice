@@ -1,5 +1,4 @@
 # practice
-practice repository.</br>
 <p>Репозиторий для лабораторных работ, написаных во время прохождения учебной практики по Java. На период практики предусмотрено 11 лабораторных работ: </br></p>
 <p> <a href="https://github.com/kostyanirchenko/practice/blob/master/src/Lab1.java">1) Обзор языка программирования java;</a></br>
 <a href="https://github.com/kostyanirchenko/practice/blob/master/src/Lab2.java">2)Преобразование и приведение типов. Компиляция программ на языке Java. Чтение консольного ввода. Математические операции;</a></br>
