@@ -13,6 +13,7 @@ import java.io.PrintWriter;
  * @author Kostya Nirchenko
  */
 public class FileWorker {
+    
     public static File file;
     public static String filename;
     
