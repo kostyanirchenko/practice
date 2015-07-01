@@ -8,13 +8,20 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 
 /**
- *
+ * Класс для работы с текстовыми файлами. Имеет возможность читать указаный файл, проверять на существование
+ * указаного пользователем файла, записывать данные в файл и перезаписывать файл при необходимости.
  * @author Kostya Nirchenko
  */
 public class FileWorker {
     public static File file;
     public static String filename;
     
+    /**
+     * Чтение указаного пользователем файла. Если файла не существует - создается новый файл, и отправляется
+     * на запись. Иначе - выводит содержимое файла на экран.
+     * @param filename - имя файла
+     * @return String
+     */
     public static String read(String filename) {
         file = new File(filename);
         StringBuilder stringBuilder = new StringBuilder();        
@@ -42,6 +49,13 @@ public class FileWorker {
         return stringBuilder.toString();
     }
     
+    /**
+     * Запись указаного пользователем файла. Вызывается в случае, если указаного файла не было найдено.
+     * Смотри {@link #read(java.lang.String)}
+     * @param file - файл для записи
+     * @param text - текст для записи
+     * @throws FileNotFoundException 
+     */
     public static void write(File file, String text) throws FileNotFoundException {
         PrintWriter pw = new PrintWriter(file);
         try {
@@ -53,7 +67,12 @@ public class FileWorker {
             pw.close();
         }
     }
-        
+    
+    /**
+     * Проверяет, существует ли указаный пользователем файл.
+     * @param file - указаный пользователем файл.
+     * @return boolean
+     */
     public static boolean exsists(File file) {       
         return file.exists();
     }
