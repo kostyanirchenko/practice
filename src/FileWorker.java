@@ -28,9 +28,9 @@ public class FileWorker {
         StringBuilder stringBuilder = new StringBuilder();        
         if(!exsists(file)) {
             try {
-                file.createNewFile();
-                System.out.println("Введите текст для записи");
                 BufferedReader in = new BufferedReader(new InputStreamReader(System.in, "Cp1251"));
+                file.createNewFile();
+                System.out.println("Введите текст для записи");             
                 String text = in.readLine();
                 write(file, text);                
             } catch(IOException e) {
@@ -42,10 +42,10 @@ public class FileWorker {
                 String line = "";
                 while((line = reader.readLine()) != null) {
                     stringBuilder.append(line).append(" ");
-                }
+                }                
             } catch (IOException e) {
                 System.out.println(e.getMessage().toString());
-            }
+            }                                
         }
         return stringBuilder.toString();
     }
@@ -70,6 +70,27 @@ public class FileWorker {
     }
     
     /**
+     * Обновление указаного пользователем файла. Считывает файл в StringBuilder и отправляет на перезапись.
+     * Смотри {@link #write(java.io.File, java.lang.String) }
+     * @param file - файл, который необходимо обновить
+     * @throws FileNotFoundException 
+     */
+    public static void update(File file) throws FileNotFoundException {
+        BufferedReader fileReader = new BufferedReader(new FileReader(file.getAbsoluteFile()));
+        try {
+            BufferedReader reader = new BufferedReader(new InputStreamReader(System.in, "Cp1251"));
+            System.out.println("Введите текст, который вы хотите добавить в файл");
+            StringBuilder sb = new StringBuilder();
+            String oldText = fileReader.readLine();
+            String tmp = reader.readLine();
+            String newText = sb.append(oldText).append(" ").append(tmp).toString();
+            write(file, newText);
+        } catch (IOException e) {
+            
+        }
+    }
+    
+    /**
      * Проверяет, существует ли указаный пользователем файл.
      * @param file - указаный пользователем файл.
      * @return boolean
@@ -78,10 +99,17 @@ public class FileWorker {
         return file.exists();
     }
     
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException {        
         System.out.println("Укажите имя файла.");
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         filename = reader.readLine();
+        File file = new File(filename);
         System.out.println(read(filename));
+        System.out.println("Вы хотите обновить файл? (y/n)");
+        if(reader.readLine().equals("y")) {
+            update(file);
+        } else {
+            return;
+        }
     }
 }
