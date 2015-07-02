@@ -2,8 +2,6 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Scanner;
-
 
 /**
  * Lab4 Task 3
@@ -18,6 +16,11 @@ public class Lab4 {
     private double y;
     private double angle;
     
+    public Lab4() {
+//        this.x = x;
+//        this.y = y;
+    }
+    
     public void setAngle(double angle) {
         this.angle = angle;
     }
@@ -27,8 +30,8 @@ public class Lab4 {
     }
     
     public void resize(double a, double b) {
-        this.x = a;
-        this.y = b;
+        this.x += a;
+        this.y += b;
     }
     
     public void move(double a, double b) {
@@ -46,10 +49,15 @@ public class Lab4 {
         return distance;
     }
     
+    public String getInfo() {
+        String info = "x = " + this.x + " y = " + this.y + "\n";
+        return info;
+    }
+    
     static class Circle extends Lab4 {
-        private double radius;
+        double radius;
         double center;
-        public Circle(double a, double b) {
+        Circle(double a, double b) {
             this.radius = a;
             this.center = b;
         }
@@ -66,23 +74,37 @@ public class Lab4 {
             center += calculateDistance(a, b, p);
         }
         
-        public void resize(double a, double b) {
-            this.radius += a;
-            this.center += b;
+        public void resize(double a) {
+            this.radius += a;            
         }
         
         @Override
         public void rotation(double angle) {
-            
+            setAngle(angle);
+            this.center = (this.center * Math.cos(angle)) - (this.center * Math.sin(angle));
         }
+
+        @Override
+        public String getInfo() {
+            String info = "Радиус = " + this.radius + " центр = " + this.center + "\n";
+            return info;
+        }    
     }
     
     static class Square extends Lab4 {
         double a, b;
-        public Square(double a, double b) {
+        Square(double a, double b) {
             this.a = a;
             this.b = b;
-        }       
+        }
+        
+        public void setA(double a) {
+            this.a = a;
+        }
+        
+        public void setB(double b) {
+            this.b = b;
+        }
         
         public void move(double a, double b, Lab4 p) {
             this.a += calculateDistance(a, b, p);
@@ -105,21 +127,28 @@ public class Lab4 {
         
         @Override
         public void rotation(double angle) {
-            double a1 = (this.a * Math.cos(angle)) - (this.b * Math.sin(angle));
-            double b1 = (this.a * Math.sin(angle)) + (this.b * Math.cos(angle));
+            setAngle(angle);
+            this.a = (this.a * Math.cos(angle)) - (this.b * Math.sin(angle));
+            this.b = (this.a * Math.sin(angle)) + (this.b * Math.cos(angle));
+        }
+        
+        @Override
+        public String getInfo() {
+            String info = "a = " + getA() + " b = " + getB() + "\n";
+            return info;
         }
     }
     
     static class Rectangle extends Lab4 {
         double a, b;
-        public Rectangle(double a, double b) {
+        Rectangle(double a, double b) {
             this.a = a;
             this.b = b;
-        }
+        }        
         
-        @Override
-        public void move(double a, double b) {
-            
+        public void move(double a, double b, Lab4 p) {
+            a += calculateDistance(a, b, p);
+            b += calculateDistance(a, b, p);
         }
         
         @Override
@@ -130,33 +159,203 @@ public class Lab4 {
         
         @Override
         public void rotation(double angle) {
-            double a1 = (this.a * Math.cos(angle)) - (this.b * Math.sin(angle));
-            double b1 = (this.a * Math.sin(angle)) + (this.b * Math.cos(angle));
+            setAngle(angle);
+            this.a = (this.a * Math.cos(angle)) - (this.b * Math.sin(angle));
+            this.b = (this.a * Math.sin(angle)) + (this.b * Math.cos(angle));
+        }
+        
+        @Override
+        public String getInfo() {
+            String info = "a = " + this.a + " b = " + this.b + "\n";
+            return info;
         }
     }
     
     public static void main(String[] args) throws IOException {
+        Circle circle = new Circle(0.0, 0.0);
+        Square square = new Square(0.0, 0.0);
+        Rectangle rectangle = new Rectangle(0.0, 0.0);
+        Lab4 lab4 = new Lab4();
+        int j;
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         for(;;) {
             for(int i = 0; i < 50; i++) {
-                System.out.println("____________________");
+                System.out.print("_");
             }
-            System.out.println("Выберите действие");
+            System.out.println("_");
+            System.out.print("1 - Создание объекта \n"
+                    + "2 - Перемещение на плоскости \n"
+                    + "3 - Изменение размера объекта \n"
+                    + "4 - Вращение объекта на определенный угол \n"
+                    + "5 - Вывести информацию по объекту \n"
+                    + "6 - Удалить объект \n"
+                    + "7 - Завершить программу \n");
             int action = Integer.parseInt(reader.readLine());
-            Scanner in = new Scanner(System.in);
-            int j;
             switch(action) {                
-                case 1: System.out.println("Создать объект: 1 - окружность, 2 - квадрат, 3 - прямоугольник");
-                    j = in.nextInt();
+                case 1: 
+                    System.out.print("Выберите объект \n"
+                            + "1 - Окружность \n"
+                            + "2 - Квадрат \n"
+                            + "3 - Прямоугольник \n");
+                    j = Integer.parseInt(reader.readLine());
                     switch(j) {
-                        case 1: Circle circle = new Circle(in.nextDouble(), in.nextDouble());
-                            System.out.println("Создана окружность с радиусом " + circle.getRadius() + " и центром " + circle.getCenter());
+                        case 1:
+                            System.out.print("Введите радиус: ");
+                            double radius = Double.parseDouble(reader.readLine());
+                            System.out.print("Введите координату центра: ");
+                            double centre = Double.parseDouble(reader.readLine());
+                            circle = new Circle(radius, centre);
+                            System.out.print(circle.getInfo());
                             break;
-                        case 2: Square square = new Square(in.nextDouble(), in.nextDouble());
-                            System.out.println("Создана окружность с радиусом " + square.getA() + " и центром " + square.getB());
+                        case 2:
+                            System.out.print("Введите сторону а: ");
+                            double a = Double.parseDouble(reader.readLine());
+                            System.out.print("Введите сторону b: ");
+                            double b = Double.parseDouble(reader.readLine());
+                            square = new Square(a, b);
+                            System.out.print(square.getInfo());
+                            break;
+                        case 3: 
+                            System.out.print("Введите радиус: ");
+                            a = Double.parseDouble(reader.readLine());
+                            System.out.print("Введите координату центра: ");
+                            b = Double.parseDouble(reader.readLine());
+                            rectangle = new Rectangle(a, b);
+                            System.out.print(rectangle.getInfo());
                             break;
                     }
-                break;
+                    break;
+                case 2:
+                    System.out.print("Выберите объект \n"
+                            + "1 - Окружность \n"
+                            + "2 - Квадрат \n"
+                            + "3 - Прямоугольник \n");
+                    j = Integer.parseInt(reader.readLine());
+                    switch(j) {
+                        case 1:
+                            System.out.print("Укажите координаты, на которые нужно переместить объект: ");
+                            double a = Double.parseDouble(reader.readLine());
+                            double b = Double.parseDouble(reader.readLine());
+                            lab4 = new Lab4();
+                            circle.move(a, b, lab4);
+                            System.out.print(circle.getInfo());
+                            break;
+                        case 2:
+                            System.out.print("Укажите координаты, на которые нужно переместить объект: ");
+                            a = Double.parseDouble(reader.readLine());
+                            b = Double.parseDouble(reader.readLine());
+                            lab4 = new Lab4();
+                            square.move(a, b, lab4);
+                            System.out.print(square.getInfo());
+                            break;
+                        case 3:
+                            System.out.print("Укажите координаты, на которые нужно переместить объект: ");
+                            a = Double.parseDouble(reader.readLine());
+                            b = Double.parseDouble(reader.readLine());
+                            lab4 = new Lab4();
+                            rectangle.move(a, b, lab4);
+                            System.out.print(rectangle.getInfo());
+                            break;
+                    }
+                    break;
+                case 3: 
+                    System.out.print("Выберите объект \n"
+                            + "1 - Окружность \n"
+                            + "2 - Квадрат \n"
+                            + "3 - Прямоугольник \n");
+                    j = Integer.parseInt(reader.readLine());
+                    switch(j) {
+                        case 1:
+                            System.out.print("Укажите координату, на которые вы хотите изменить радиус объекта: ");
+                            double a = Double.parseDouble(reader.readLine());                            
+                            circle.resize(a);
+                            System.out.print(circle.getInfo());
+                            break;
+                        case 2:
+                            System.out.print("Укажите координаты, на которые вы хотите изменить размер объекта: ");
+                            a = Double.parseDouble(reader.readLine());
+                            double b = Double.parseDouble(reader.readLine());
+                            square.resize(a, b);
+                            System.out.print(square.getInfo());
+                            break;
+                        case 3:
+                            System.out.print("Укажите координаты, на которые вы хотите изменить размер объекта: ");
+                            a = Double.parseDouble(reader.readLine());
+                            b = Double.parseDouble(reader.readLine());
+                            rectangle.resize(a, b);
+                            System.out.print(rectangle.getInfo());
+                            break;
+                    }
+                    break;
+                case 4:
+                    System.out.print("Выберите объект \n"
+                            + "1 - Окружность \n"
+                            + "2 - Квадрат \n"
+                            + "3 - Прямоугольник \n");
+                    j = Integer.parseInt(reader.readLine());
+                    switch(j) {
+                        case 1:
+                            System.out.print("Введите угол: ");
+                            double angle = Double.parseDouble(reader.readLine());
+                            circle.rotation(angle);
+                            System.out.print(circle.getInfo());
+                            break;
+                        case 2:
+                            System.out.print("Введите угол: ");
+                            angle = Double.parseDouble(reader.readLine());
+                            square.rotation(angle);
+                            System.out.print(square.getInfo());
+                            break;
+                        case 3:
+                            System.out.print("Введите угол: ");
+                            angle = Double.parseDouble(reader.readLine());
+                            rectangle.rotation(angle);
+                            System.out.print(rectangle.getInfo());
+                            break;
+                    }
+                    break;
+                case 5:
+                    System.out.print("Выберите объект \n"
+                            + "1 - Окружность \n"
+                            + "2 - Квадрат \n"
+                            + "3 - Прямоугольник \n");
+                    j = Integer.parseInt(reader.readLine());
+                    switch(j) {
+                        case 1:
+                            System.out.print(circle.getInfo());
+                            break;
+                        case 2:
+                            System.out.print(square.getInfo());
+                            break;
+                        case 3:
+                            System.out.print(rectangle.getInfo());
+                            break;
+                    }
+                    break;
+                case 6:
+                    System.out.print("Выберите объект \n"
+                            + "1 - Окружность \n"
+                            + "2 - Квадрат \n"
+                            + "3 - Прямоугольник \n");
+                    j = Integer.parseInt(reader.readLine());
+                    switch (j) {
+                        case 1:
+                            circle = null;
+                            System.out.println("Объект удален");
+                            break;
+                        case 2:
+                            square = null;
+                            System.out.println("Объект удален");
+                            break;
+                        case 3:
+                            rectangle = null;
+                            System.out.println("Объект удален");
+                            break;
+                    }
+                    break;
+                case 7:
+                    System.exit(0);
+                    break;
             }
         }
     }
