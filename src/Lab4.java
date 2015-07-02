@@ -29,14 +29,24 @@ public class Lab4 {
         return angle;
     }
     
+    /**
+     * Устанавливает новые координаты объекта
+     * @param a - абсиса
+     * @param b - ордината
+     */
     public void resize(double a, double b) {
         this.x += a;
         this.y += b;
     }
     
+    /**
+     * Перемещает объект на указаные координаты
+     * @param a - абсиса
+     * @param b - ордината
+     */
     public void move(double a, double b) {
-        this.x += a;
-        this.y += b;
+        this.x += calculateDistance(a, b, this);
+        this.y += calculateDistance(a, b, this);
     }
     
     public void rotation(double angle) {
@@ -44,11 +54,22 @@ public class Lab4 {
         double y1 = (this.x * Math.sin(angle)) + (this.y * Math.cos(angle));
     }
     
+    /**
+     * Расчитывает дистанцию, на которую необходимо переместить объект
+     * @param a - абсиса
+     * @param b - ордината
+     * @param p - экземпляр класса {@link Lab4}
+     * @return double
+     */
     public double calculateDistance(double a, double b, Lab4 p) {
         double distance = Math.sqrt(Math.pow((p.x - a), 2) + Math.pow((p.y - b), 2));
         return distance;
     }
     
+    /**
+     * Выводит информацию об объекте (его координаты)
+     * @return String
+     */
     public String getInfo() {
         String info = "x = " + this.x + " y = " + this.y + "\n";
         return info;
@@ -70,20 +91,38 @@ public class Lab4 {
             return center;
         }
         
+        /**
+         * Перемещает центр окружности на указаную координату
+         * @param a - абсиса
+         * @param b - ордината
+         * @param p - экземпляр класса {@link Lab4}
+         */
         public void move(double a, double b, Lab4 p) {
             center += calculateDistance(a, b, p);
         }
         
+        /**
+         * Задает новый радиус окружности
+         * @param a - новое значение радиуса окружности
+         */
         public void resize(double a) {
             this.radius += a;            
         }
         
+        /**
+         * Поворачивает окружность на заданый угол
+         * @param angle - угол, на который необходимо повернуть окружность
+         */
         @Override
         public void rotation(double angle) {
             setAngle(angle);
             this.center = (this.center * Math.cos(angle)) - (this.center * Math.sin(angle));
         }
-
+        
+        /**
+         * Возвращает информацию об окружности (её радиус и координаты центра)
+         * @return String
+         */
         @Override
         public String getInfo() {
             String info = "Радиус = " + this.radius + " центр = " + this.center + "\n";
@@ -106,6 +145,12 @@ public class Lab4 {
             this.b = b;
         }
         
+        /**
+         * Перемещает квадрат на заданые координаты
+         * @param a - абсиса
+         * @param b - ордината
+         * @param p - экземпляр класса {@link Lab4}
+         */
         public void move(double a, double b, Lab4 p) {
             this.a += calculateDistance(a, b, p);
             this.b += calculateDistance(a, b, p);
@@ -119,12 +164,21 @@ public class Lab4 {
             return b;
         }
         
+        /**
+         * Изменяет размены квадрата на указаные
+         * @param a - абсиса
+         * @param b - ордината
+         */
         @Override
         public void resize(double a, double b) {
             this.a += a;
             this.b += b;
         }
         
+        /**
+         * Поворачивает квадрат на указаный угол
+         * @param angle - угол
+         */
         @Override
         public void rotation(double angle) {
             setAngle(angle);
@@ -132,6 +186,10 @@ public class Lab4 {
             this.b = (this.a * Math.sin(angle)) + (this.b * Math.cos(angle));
         }
         
+        /**
+         * Возвращает информацию о квадрате (координаты его сторон)
+         * @return String
+         */
         @Override
         public String getInfo() {
             String info = "a = " + getA() + " b = " + getB() + "\n";
@@ -146,17 +204,32 @@ public class Lab4 {
             this.b = b;
         }        
         
+        /**
+         * Перемещает прямоугольник на указаные координаты
+         * @param a - абсиса
+         * @param b - ордината
+         * @param p - экземпляр класса {@link Lab4}
+         */
         public void move(double a, double b, Lab4 p) {
             a += calculateDistance(a, b, p);
             b += calculateDistance(a, b, p);
         }
         
+        /**
+         * Изменяет стороны прямоугольника на указаные
+         * @param a - сторона а
+         * @param b - сторона b
+         */
         @Override
         public void resize(double a, double b) {
             this.a += a;
             this.b += b;
         }
         
+        /**
+         * Поворачивает прямоугольник на заданый угол
+         * @param angle - угол
+         */
         @Override
         public void rotation(double angle) {
             setAngle(angle);
