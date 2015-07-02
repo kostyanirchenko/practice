@@ -4,7 +4,9 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 /**
- * Lab4 Task 3 Построить систему классов для описания плоских геометрических
+ * Lab4 Task 3 
+ * 
+ * Построить систему классов для описания плоских геометрических
  * фигур: круга, квадрата, прямоугольника. Предусмотреть методы для создания
  * объектов, перемещения на плоскости, изменения размеров и вращения на заданный
  * угол. Написать программу, демонстрирующую работу с этими классами. Программа
@@ -18,10 +20,7 @@ public class Lab4 {
     private double y;
     private double angle;
 
-    public Lab4() {
-//        this.x = x;
-//        this.y = y;
-    }
+    public Lab4() {}
 
     public void setAngle(double angle) {
         this.angle = angle;
