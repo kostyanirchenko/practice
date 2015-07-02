@@ -3,7 +3,7 @@
 <p> <a href="https://github.com/kostyanirchenko/practice/blob/master/src/Lab1.java">1) Обзор языка программирования java;</a></br>
 <a href="https://github.com/kostyanirchenko/practice/blob/master/src/Lab2.java">2)Преобразование и приведение типов. Компиляция программ на языке Java. Чтение консольного ввода. Математические операции;</a></br>
 <a href="https://github.com/kostyanirchenko/practice/blob/master/src/Lab3.java">3) Массивы. Операции над строками. Чтение и запись файлов. Обработка строк;</a></br>
-4) Инкапсуляция. Классы. Создание объектов. Методы, конструкторы и ключевое слово this;</br>
+<a href="https://github.com/kostyanirchenko/practice/blob/master/src/Lab4.java">4) Инкапсуляция. Классы. Создание объектов. Методы, конструкторы и ключевое слово this;</a></br>
 5) Наследование и перегрузка методов;</br>
 6) Полиморфизм;</br>
 7) Обработка исключений;</br>
