@@ -4,8 +4,8 @@
 <a href="https://github.com/kostyanirchenko/practice/blob/master/src/Lab2.java">2)Преобразование и приведение типов. Компиляция программ на языке Java. Чтение консольного ввода. Математические операции;</a></br>
 <a href="https://github.com/kostyanirchenko/practice/blob/master/src/Lab3.java">3) Массивы. Операции над строками. Чтение и запись файлов. Обработка строк;</a></br>
 <a href="https://github.com/kostyanirchenko/practice/blob/master/src/Lab4.java">4) Инкапсуляция. Классы. Создание объектов. Методы, конструкторы и ключевое слово this;</a></br>
-5) Наследование и перегрузка методов;</br>
-6) Полиморфизм;</br>
+<a href="https://github.com/kostyanirchenko/practice/blob/master/src/Lab5.java">5) Наследование и перегрузка методов;</br>
+6) Полиморфизм;</a></br>
 7) Обработка исключений;</br>
 8) Потоки в Java;</br>
 9) Классы пакета java.awt. Основы оконной графики. Работа с фреймами. Работа с графикой, цветом и шрифтами. Использование элементов управления;</br>
