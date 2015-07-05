@@ -58,7 +58,7 @@ class BinaryString extends Str {
             if (s.isEmpty() && s1.isEmpty()) {
                 System.out.println("Строки пустые");
             } else {
-                System.out.println(Integer.toBinaryString(Integer.parseInt(s) +Integer.parseInt(s1)));
+                System.out.println(Integer.toBinaryString(Integer.parseInt(s) + Integer.parseInt(s1)));
             }
         } catch(NumberFormatException e) {
             System.out.println("Необходима численная строка");
@@ -155,7 +155,7 @@ public class Lab5 {
                     switch(j) {
                         case 1:
                             if(symbolString.s != null) {
-                                System.out.println(Integer.toHexString(Integer.parseInt(symbolString.s)));
+                                System.out.println(symbolString.s);
                             } else {
                                 System.out.println("Объект удален либо еще не был создан");
                             }
