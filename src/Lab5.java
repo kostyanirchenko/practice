@@ -2,6 +2,8 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.HashMap;
+import java.util.Map;
 
 
 /**
@@ -21,45 +23,74 @@ import java.io.InputStreamReader;
  * T2 - BinString - Двоичцая строка (изображение двоичного числа)
  * @author Студент
  */
-public class Lab5 {
+
+class Str {
     String s;
     
-    public Lab5(String s1) {
+    Str(String s1) {
         s = s1;
     }
-    
-    static class SymbolString extends Lab5 {
-        String s;
-        public SymbolString(String s1) {
-            super(s1);
-        }
-        
-        public String add(String s1, String s2) {
-            return s1 + s2;
-        }
-        
-        public void show() {
-            System.out.print(s + "\n");
-        }
+}
+
+class SymbolString extends Str {
+
+    public SymbolString(String s1) {
+        super(s1);
     }
     
-    static class BinaryString extends Lab5 {
-        String s;
-        public BinaryString(String s1) {
-            super(s1);
+    void concat(String s, String s1) {
+        if(s.isEmpty() && s1.isEmpty()) {
+            System.out.println("Строки пустые");
         }
-        
-        public String add(String s1, String s2) {
-            return s1 + s2;
+        else {
+            System.out.println(s + " " + s1);
         }
-        
-        public void show() {
-            System.out.print(s + "\n");
+    }    
+}
+
+class BinaryString extends Str {
+    public BinaryString(String s1) {
+        super(s1);
+    }
+    
+    void concat(String s, String s1) {
+        try {
+            if (s.isEmpty() && s1.isEmpty()) {
+                System.out.println("Строки пустые");
+            } else {
+                System.out.println(Integer.toBinaryString(Integer.parseInt(s) +Integer.parseInt(s1)));
+            }
+        } catch(NumberFormatException e) {
+            System.out.println("Необходима численная строка");
+        }        
+    }
+}
+
+public class Lab5 {
+    public static boolean checkString(String stringToCheck) {
+        if (stringToCheck == null || stringToCheck.length() == 0) {
+            return false;
         }
+
+        int i = 0;
+        if (stringToCheck.charAt(0) == '-') {
+            if (stringToCheck.length() == 1) {
+                return false;
+            }
+            i = 1;
+        }
+
+        char c;
+        for (; i < stringToCheck.length(); i++) {
+            c = stringToCheck.charAt(i);
+            if (!(c >= '0' && c <= '9')) {
+                return false;
+            }
+        }
+        return true;
     }
     
     public static void main(String[] args) throws IOException {
-        Lab5 lab5 = new Lab5("");
         SymbolString symbolString = new SymbolString("");
         BinaryString binaryString = new BinaryString("0");
         int j;
@@ -103,12 +134,17 @@ public class Lab5 {
                         case 1:
                             System.out.print("Укажите вторую строку ");
                             s1 = reader.readLine();
-                            System.out.print(symbolString.add(symbolString.toString(), s1) + "\n");
+                            symbolString.concat(symbolString.s, s1);
                             break;
                         case 2:
                             System.out.print("Укажите вторую строку ");
                             s1 = reader.readLine();
-                            System.out.println(binaryString.add(binaryString.toString(), s1));
+                            if (!checkString(binaryString.s) || !checkString(s1)) {
+                                System.out.println("Ошибка, строки должны быть числовыми");
+                            }
+                            else {
+                                binaryString.concat(binaryString.s, s1);
+                            }                            
                             break;
                     }
                     break;
@@ -118,10 +154,18 @@ public class Lab5 {
                     j = Integer.parseInt(reader.readLine());
                     switch(j) {
                         case 1:
-                            symbolString.show();
+                            if(symbolString.s != null) {
+                                System.out.println(Integer.toHexString(Integer.parseInt(symbolString.s)));
+                            } else {
+                                System.out.println("Объект удален либо еще не был создан");
+                            }
                             break;
                         case 2:
-                            binaryString.show();
+                            if(binaryString.s != null) {
+                                System.out.println(Integer.toBinaryString(Integer.parseInt(binaryString.s)));
+                            } else {
+                                System.out.println("Объект удален либо еще не был создан");
+                            }
                             break;
                     }
                     break;
