@@ -2,8 +2,6 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.HashMap;
-import java.util.Map;
 
 
 /**
@@ -43,9 +41,13 @@ class SymbolString extends Str {
             System.out.println("Строки пустые");
         }
         else {
-            System.out.println(s + " " + s1);
+            System.out.println(s + s1);
         }
-    }    
+    }
+    
+    String show() {
+        return s;
+    }
 }
 
 class BinaryString extends Str {
@@ -63,6 +65,10 @@ class BinaryString extends Str {
         } catch(NumberFormatException e) {
             System.out.println("Необходима численная строка");
         }        
+    }
+    
+    String show() {
+        return Integer.toBinaryString(Integer.parseInt(s));
     }
 }
 
@@ -155,14 +161,14 @@ public class Lab5 {
                     switch(j) {
                         case 1:
                             if(symbolString.s != null) {
-                                System.out.println(symbolString.s);
+                                System.out.print(symbolString.show() + "\n");
                             } else {
                                 System.out.println("Объект удален либо еще не был создан");
                             }
                             break;
                         case 2:
                             if(binaryString.s != null) {
-                                System.out.println(Integer.toBinaryString(Integer.parseInt(binaryString.s)));
+                                System.out.print(binaryString.show() + "\n");
                             } else {
                                 System.out.println("Объект удален либо еще не был создан");
                             }
